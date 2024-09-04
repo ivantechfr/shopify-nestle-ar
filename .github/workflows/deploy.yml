@@ -24,4 +24,4 @@ jobs:
           # Password generated from Theme Access app
           SHOPIFY_CLI_THEME_TOKEN: ${{ secrets.SHOPIFY_CLI_THEME_TOKEN }}
           SHOPIFY_CLI_TTY: 0
-        run: shopify theme push --path miniagarwaltm.myshopify.com --theme 144639000825
+        run: shopify theme push --path miniagarwaltm.myshopify.com --themeid 144639000825
