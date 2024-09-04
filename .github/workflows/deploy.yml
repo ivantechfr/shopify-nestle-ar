@@ -19,7 +19,7 @@ jobs:
         run: npm install -g @shopify/cli
       - name: Deploy
         env:
-          # Store URL, like your-store.myshopify.com
+          # Store URL, like your-store.myshopify
           SHOPIFY_FLAG_STORE: '${{ secrets.SHOPIFY_STORE }}'
           # Password generated from Theme Access app
           SHOPIFY_CLI_THEME_TOKEN: ${{ secrets.SHOPIFY_CLI_THEME_TOKEN }}
