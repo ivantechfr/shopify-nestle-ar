@@ -1,0 +1,27 @@
+name: Deploy Shopify Theme
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v2
+
+    - name: Install Node.js
+      uses: actions/setup-node@v2
+      with:
+        node-version: '14'
+
+    - name: Install Shopify Theme Kit
+      run: npm install -g @shopify/themekit
+
+    - name: Deploy to Shopify
+      env:
+        SHOPIFY_PASSWORD: ${{ secrets.SHOPIFY_THEME_ACCESS_PASSWORD }}
+      run: theme deploy --password=$SHOPIFY_PASSWORD --store=miniagarwaltm.myshopify.com --themeid=Dawn
