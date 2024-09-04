@@ -22,7 +22,7 @@ jobs:
       run: npm install -g @shopify/themekit
 
     - name: Add npm global bin to PATH
-      run: echo "::add-path::$(npm bin -g)"
+      run: echo "$(npm bin -g)" >> $GITHUB_PATH
 
     - name: Verify Theme Kit Installation
       run: theme --version
