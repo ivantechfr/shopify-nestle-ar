@@ -14,14 +14,14 @@ jobs:
       - uses: ruby/setup-ruby@v1
         with:
           ruby-version: 3.1
-      - name: Install Shopify Theme Kit
-        run: npm install -g @shopify/themekit
-      - name: Add npm global bin to PATH
-        run: echo "PATH=$(npm bin -g):\$PATH" >> $GITHUB_ENV
-      - name: Verify Theme Kit Installation
-        run: theme --version
-      - name: Deploy to Shopify
+          bundler: 'latest'
+      - name: Install Shopify CLI
+        run: npm install -g @shopify/cli
+      - name: Deploy
         env:
-          SHOPIFY_PASSWORD: ${{ secrets.SHOPIFY_CLI_THEME_TOKEN }}
-          SHOPIFY_STORE: ${{ secrets.SHOPIFY_STORE }}
-        run: theme deploy --password=$SHOPIFY_PASSWORD --store=$SHOPIFY_STORE --themeid=Dawn
+          # Store URL, like your-store.myshopify.com
+          SHOPIFY_FLAG_STORE: '${{ secrets.SHOPIFY_STORE }}'
+          # Password generated from Theme Access app
+          SHOPIFY_CLI_THEME_TOKEN: ${{ secrets.SHOPIFY_CLI_THEME_TOKEN }}
+          SHOPIFY_CLI_TTY: 0
+        run: shopify theme push --path ./miniagarwaltm.myshopify.com --theme #144639000825
