@@ -16,12 +16,10 @@ jobs:
           ruby-version: 3.1
           bundler: 'latest'
       - name: Install Shopify CLI
-        run: npm install -g @shopify/cli
+        run: npm install -g @shopify/cli @shopify/theme
       - name: Deploy
         env:
-          # Store URL, like your-store.myshopify.com
           SHOPIFY_FLAG_STORE: '${{ secrets.SHOPIFY_STORE }}'
-          # Password generated from Theme Access app
           SHOPIFY_CLI_THEME_TOKEN: ${{ secrets.SHOPIFY_CLI_THEME_TOKEN }}
           SHOPIFY_CLI_TTY: 0
-        run: shopify theme push --path ./SHOPIFY-DEMO --theme 144639000825
+        run: shopify theme pull --theme 144639000825 --verbose
