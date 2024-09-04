@@ -1,33 +1,27 @@
-name: Deploy Shopify Theme
+name: Theme deploy
 
-on:
-  push:
-    branches:
-      - main
+on: [push]
 
 jobs:
   deploy:
+    name: Deploy
     runs-on: ubuntu-latest
-
     steps:
-    - name: Checkout repository
-      uses: actions/checkout@v2
-
-    - name: Install Node.js
-      uses: actions/setup-node@v2
-      with:
-        node-version: '14'
-
-    - name: Install Shopify Theme Kit
-      run: npm install -g @shopify/themekit
-
-    - name: Add npm global bin to PATH
-      run: echo "$(npm bin -g)" >> $GITHUB_PATH
-
-    - name: Verify Theme Kit Installation
-      run: theme --version
-
-    - name: Deploy to Shopify
-      env:
-        SHOPIFY_PASSWORD: ${{ secrets.SHOPIFY_THEME_ACCESS_PASSWORD }}
-      run: theme deploy --password=$SHOPIFY_PASSWORD --store=miniagarwaltm.myshopify.com --themeid=Dawn
+      - uses: actions/checkout@v1
+      - uses: actions/setup-node@v3
+        with:
+          node-version: 18
+      - uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: 3.1
+          bundler: 'latest'
+      - name: Install Shopify CLI
+        run: npm install -g @shopify/cli
+      - name: Deploy
+        env:
+          # Store URL, like your-store.myshopify.com
+          SHOPIFY_FLAG_STORE: '${{ secrets.SHOPIFY_STORE }}'
+          # Password generated from Theme Access app
+          SHOPIFY_CLI_THEME_TOKEN: ${{ secrets.SHOPIFY_CLI_THEME_TOKEN }}
+          SHOPIFY_CLI_TTY: 0
+        run: shopify theme push --path miniagarwaltm.myshopify.com --theme Dawn
