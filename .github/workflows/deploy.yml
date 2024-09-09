@@ -1,3 +1,32 @@
+# name: Theme deploy
+
+# on: [push]
+
+# jobs:
+#   deploy:
+#     name: Deploy
+#     runs-on: ubuntu-latest
+#     steps:
+#       - uses: actions/checkout@v1
+#       - uses: actions/setup-node@v3
+#         with:
+#           node-version: 18
+#       - uses: ruby/setup-ruby@v1
+#         with:
+#           ruby-version: 3.1
+#           bundler: 'latest'
+#       - name: Install Shopify CLI
+#         run: npm install -g @shopify/cli @shopify/theme
+#       - name: Deploy
+#         env:
+#             # enter the shopify store name here
+#           SHOPIFY_FLAG_STORE: '${{ secrets.SHOPIFY_STORE_NAME }}'
+#             #  enter the shopify password here
+#           SHOPIFY_CLI_THEME_TOKEN: ${{ secrets.SHOPIFY_TOKEN }}
+#           SHOPIFY_CLI_TTY: 0
+#         run: shopify theme pull --theme 144639000825 --verbose
+
+
 name: Theme deploy
 
 on: [push]
@@ -16,12 +45,12 @@ jobs:
           ruby-version: 3.1
           bundler: 'latest'
       - name: Install Shopify CLI
-        run: npm install -g @shopify/cli @shopify/theme
+        run: npm install -g @shopify/cli
       - name: Deploy
         env:
-            # enter the shopify store name here
-          SHOPIFY_FLAG_STORE: '${{ secrets.SHOPIFY_STORE_NAME }}'
-            #  enter the shopify password here
-          SHOPIFY_CLI_THEME_TOKEN: ${{ secrets.SHOPIFY_TOKEN }}
+          # Store URL, like your-store.myshopify.com
+          SHOPIFY_FLAG_STORE: '${{ secrets.SHOPIFY_STORE }}'
+          # Password generated from Theme Access app
+          SHOPIFY_CLI_THEME_TOKEN: ${{ secrets.SHOPIFY_CLI_THEME_TOKEN }}
           SHOPIFY_CLI_TTY: 0
-        run: shopify theme pull --theme 144639000825 --verbose
+        run: shopify theme push --theme 144639000825 --verbose
