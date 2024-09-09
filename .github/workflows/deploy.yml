@@ -20,7 +20,7 @@ jobs:
       - name: Deploy
         env:
             # enter the shopify store name here
-          SHOPIFY_FLAG_STORE: '${{ secrets.SHOPIFY_STORE_NAME }}'
+          SHOPIFY_FLAG_STORE: '${{ secrets.SHOPIFY_STORE_NEW }}'
             #  enter the shopify password here
           SHOPIFY_CLI_THEME_TOKEN: ${{ secrets.SHOPIFY_TOKEN }}
           SHOPIFY_CLI_TTY: 0
