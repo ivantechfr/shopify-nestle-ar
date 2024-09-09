@@ -21,6 +21,7 @@ jobs:
         env:
             # enter the shopify store name here
           SHOPIFY_FLAG_STORE: '${{ secrets.SHOPIFY_STORE }}'
+            #  enter the shopify password here
           SHOPIFY_CLI_THEME_TOKEN: ${{ secrets.SHOPIFY_CLI_THEME_TOKEN }}
           SHOPIFY_CLI_TTY: 0
         run: shopify theme pull --theme 144639000825 --verbose
