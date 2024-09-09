@@ -25,3 +25,6 @@ jobs:
           SHOPIFY_CLI_THEME_TOKEN: ${{ secrets.SHOPIFY_TOKEN }}
           SHOPIFY_CLI_TTY: 0
         run: shopify theme pull --theme 144639000825 --verbose
+
+
+
